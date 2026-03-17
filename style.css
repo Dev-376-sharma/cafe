@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap');
 
 :root {
-  --primary: #2c1a0e;
-  --primary-light: #5c3a22;
-  --cream: #faf6f0;
-  --cream-dark: #f0e8d8;
-  --beige: #e8d5b0;
-  --gold: #c9a84c;
+  --primary: #0f172a;      /* Deep Navy */
+  --primary-light: #1e293b; /* Lighter Navy */
+  --cream: #ffffff;        /* Pure White */
+  --cream-dark: #f8fafc;   /* Off White / Light Gray */
+  --beige: #e2e8f0;        /* Borders / Light Grays */
+  --gold: #c9a84c;         /* Kept Gold as accent since Navy & Gold is great */
   --gold-light: #e8c97a;
   --gold-dark: #9a7a2e;
   --navy: #1c2b4a;
   --white: #ffffff;
-  --text-dark: #1a1208;
-  --text-mid: #4a3520;
-  --text-light: #8b7050;
-  --shadow-sm: 0 2px 12px rgba(44,26,14,.08);
-  --shadow-md: 0 8px 32px rgba(44,26,14,.14);
-  --shadow-lg: 0 20px 60px rgba(44,26,14,.2);
+  --text-dark: #0f172a;
+  --text-mid: #334155;
+  --text-light: #64748b;
+  --shadow-sm: 0 2px 12px rgba(15,23,42,.08);
+  --shadow-md: 0 8px 32px rgba(15,23,42,.14);
+  --shadow-lg: 0 20px 60px rgba(15,23,42,.2);
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
