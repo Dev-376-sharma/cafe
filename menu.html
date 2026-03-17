@@ -21,8 +21,11 @@
       <li><a href="menu.html" class="active">Menu</a></li>
       <li><a href="contact.html">Reservation</a></li>
       <li><a href="index.html#gallery">Gallery</a></li>
-      <li><a href="contact.html" class="nav-cta">Reserve Table</a></li>
+      <li><a href="events.html">Events</a></li>`n      <li><a href="contact.html" class="nav-cta">Reserve Table</a></li>
     </ul>
+    <button class="nav-cart-btn" onclick="openCart()" aria-label="Open Cart">
+      🛒<span class="cart-badge">0</span>
+    </button>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -34,7 +37,7 @@
   <a href="index.html" onclick="closeMobile()">Home</a>
   <a href="menu.html" onclick="closeMobile()">Menu</a>
   <a href="contact.html" onclick="closeMobile()">Reservation</a>
-  <a href="index.html#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="index.html#gallery" onclick="closeMobile()">Gallery</a>`n  <a href="events.html" onclick="closeMobile()">Events</a>
   <a href="contact.html" onclick="closeMobile()" style="color:var(--gold-light)">Reserve Table</a>
 </div>
 
@@ -270,6 +273,49 @@
 
 <div id="orderToast" style="position:fixed;bottom:30px;right:30px;background:var(--primary);color:#fff;padding:14px 24px;border-radius:50px;box-shadow:0 8px 32px rgba(0,0,0,.3);font-size:.875rem;font-weight:600;z-index:9999;display:none;align-items:center;gap:10px;">
   <span>✓</span><span id="toastMsg">Added to cart!</span>
+</div>
+
+<!-- CART HTML -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Your Order</h3>
+    <button id="closeCart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p style="text-align:center;color:var(--text-light);margin-top:20px;">Your cart is empty.</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total:</span> <strong id="cartTotalAmt">₹0</strong></div>
+    <form id="orderForm">
+      <div class="form-group">
+        <label>Table Number</label>
+        <input type="number" id="tableNo" required placeholder="e.g. 4" min="1">
+      </div>
+      <div class="form-group">
+        <label>Payment Method</label>
+        <select id="paymentMethod" required>
+          <option value="Cash">Cash</option>
+          <option value="Online">Online / UPI</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-gold" style="width:100%">Submit Order</button>
+    </form>
+  </div>
+</div>
+
+<!-- Token Modal -->
+<div class="modal" id="tokenModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
+  <div class="modal-content" style="background:#fff;padding:2rem;border-radius:16px;text-align:center;max-width:400px;width:90%;box-shadow:0 10px 40px rgba(0,0,0,0.2);">
+    <div style="font-size:3rem;margin-bottom:1rem;">🍽️</div>
+    <h2 style="color:var(--primary);margin-bottom:.5rem;">Order Received!</h2>
+    <p style="color:var(--text-mid);margin-bottom:1.5rem;">Please show this token at the counter or wait at your table.</p>
+    <div style="background:var(--cream-dark);padding:1rem;border-radius:8px;margin-bottom:1.5rem;border:2px dashed var(--gold);">
+      <span style="display:block;font-size:.8rem;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;">Token Number</span>
+      <strong id="tokenNumberDisplay" style="font-size:2.5rem;color:var(--primary);font-family:'Playfair Display',serif;">#000</strong>
+    </div>
+    <button type="button" class="btn btn-dark" onclick="closeTokenModal()" style="width:100%;justify-content:center;">Back to Menu</button>
+  </div>
 </div>
 
 <script src="script.js"></script>
