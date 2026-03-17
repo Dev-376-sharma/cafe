@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu – La Quench The Rooftop Cafe</title>
+  <meta name="description" content="Explore our winter specials menu — handcrafted beverages and signature desserts at La Quench, Ahmedabad."/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">La Quench</span>
+      <span class="nav-logo-sub">The Rooftop Cafe</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html" class="active">Menu</a></li>
+      <li><a href="contact.html">Reservation</a></li>
+      <li><a href="index.html#gallery">Gallery</a></li>
+      <li><a href="contact.html" class="nav-cta">Reserve Table</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="menu.html" onclick="closeMobile()">Menu</a>
+  <a href="contact.html" onclick="closeMobile()">Reservation</a>
+  <a href="index.html#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="contact.html" onclick="closeMobile()" style="color:var(--gold-light)">Reserve Table</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="padding-top:80px;">
+  <div class="ph-content">
+    <span class="section-tag">Winter Specials 2025</span>
+    <h1>Our Menu</h1>
+  </div>
+</div>
+
+<!-- MENU SECTION -->
+<section class="menu-section">
+  <div class="container">
+
+    <!-- Filter Tabs -->
+    <div class="menu-filters">
+      <button class="filter-btn active" data-filter="all" id="filter-all">All Items</button>
+      <button class="filter-btn" data-filter="drinks" id="filter-drinks">☕ Mugs of Comfort</button>
+      <button class="filter-btn" data-filter="desserts" id="filter-desserts">🍰 Melted Moments</button>
+    </div>
+
+    <!-- MUGS OF COMFORT -->
+    <div class="menu-cat visible" id="cat-drinks" data-cat="drinks">
+      <div class="menu-category reveal">
+        <h2 class="menu-cat-title">☕ Mugs of Comfort</h2>
+        <div class="cat-line"></div>
+      </div>
+      <div class="menu-grid">
+
+        <div class="menu-card reveal" data-cat="drinks">
+          <div class="menu-card-emoji">🌿</div>
+          <h3>Detox Drink</h3>
+          <p>A refreshing herbal blend designed to cleanse and rejuvenate your senses from the inside out.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹220</span>
+            <button class="btn-cart" onclick="addToOrder('Detox Drink',220)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-cat="drinks">
+          <div class="menu-card-emoji">🫖</div>
+          <h3>Taste of Saurashtra</h3>
+          <p>An aromatic regional blend celebrating the flavours and spices of Saurashtra's tea culture.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹230</span>
+            <button class="btn-cart" onclick="addToOrder('Taste of Saurashtra',230)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-cat="drinks" style="position:relative;">
+          <span class="popular-badge">⭐ Popular</span>
+          <div class="menu-card-emoji">🌸</div>
+          <h3>Royale Kashmiri Kahwa</h3>
+          <p>Saffron-infused Kashmiri green tea with rose petals, cardamom, and a sprinkle of dry fruits.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹250</span>
+            <button class="btn-cart" onclick="addToOrder('Royale Kashmiri Kahwa',250)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-cat="drinks" style="position:relative;">
+          <span class="popular-badge">⭐ Popular</span>
+          <div class="menu-card-emoji">☕</div>
+          <h3>Classic Hot Chocolate</h3>
+          <p>Rich velvety cocoa blended with premium chocolate and steamed milk — pure, warm indulgence.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹260</span>
+            <button class="btn-cart" onclick="addToOrder('Classic Hot Chocolate',260)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-cat="drinks">
+          <div class="menu-card-emoji">🎄</div>
+          <h3>Cinnamon Hot Chocolate</h3>
+          <p>Our classic hot chocolate elevated with warm cinnamon — festive, spiced, and utterly comforting.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹300</span>
+            <button class="btn-cart" onclick="addToOrder('Cinnamon Hot Chocolate',300)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-cat="drinks">
+          <div class="menu-card-emoji">🪄</div>
+          <h3>Marshmallow Hot Chocolate</h3>
+          <p>Dreamy hot chocolate topped with cloud-like marshmallows and a dusting of cocoa powder.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹300</span>
+            <button class="btn-cart" onclick="addToOrder('Marshmallow Hot Chocolate',300)">+ Add to Cart</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MELTED MOMENTS -->
+    <div class="menu-cat visible" id="cat-desserts" data-cat="desserts">
+      <div class="menu-category reveal">
+        <h2 class="menu-cat-title">🍰 Melted Moments of Pleasure</h2>
+        <div class="cat-line"></div>
+      </div>
+      <div class="menu-grid">
+
+        <div class="menu-card reveal" data-cat="desserts" style="position:relative;">
+          <span class="popular-badge">🏆 Bestseller</span>
+          <div class="menu-card-emoji">🍓</div>
+          <h3>Nutella Strawberry Cheesecake</h3>
+          <p>Creamy no-bake cheesecake crowned with a generous Nutella drizzle and fresh strawberries.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹320</span>
+            <button class="btn-cart" onclick="addToOrder('Nutella Strawberry Cheesecake',320)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-cat="desserts" style="position:relative;">
+          <span class="popular-badge">⭐ Popular</span>
+          <div class="menu-card-emoji">🍫</div>
+          <h3>Drizzling Chocolate Cheesecake</h3>
+          <p>Silky smooth cheesecake base with a warm flowing chocolate sauce poured tableside.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹300</span>
+            <button class="btn-cart" onclick="addToOrder('Drizzling Chocolate Cheesecake',300)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-cat="desserts">
+          <div class="menu-card-emoji">🍓</div>
+          <h3>Strawberry Chocolate</h3>
+          <p>A perfect harmony of fresh strawberries and rich Belgian chocolate — sweet meets indulgent.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹300</span>
+            <button class="btn-cart" onclick="addToOrder('Strawberry Chocolate',300)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-cat="desserts">
+          <div class="menu-card-emoji">🤎</div>
+          <h3>Drizzling Chocolate Strawberry Brownie</h3>
+          <p>Fudgy warm brownie topped with fresh strawberries and a generous drizzle of hot chocolate sauce.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">₹280</span>
+            <button class="btn-cart" onclick="addToOrder('Drizzling Chocolate Strawberry Brownie',280)">+ Add to Cart</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- QR Notice -->
+    <div class="reveal" style="margin-top:3rem;text-align:center;background:var(--white);border-radius:var(--radius-lg);padding:2.5rem;box-shadow:var(--shadow-sm);border:1px solid var(--beige);">
+      <p style="font-size:2rem;margin-bottom:.75rem;">📱</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:.5rem;color:var(--primary);">Contactless QR Ordering</h3>
+      <p style="font-size:.88rem;color:var(--text-light);max-width:440px;margin:0 auto .5rem;">Scan the QR code at your table to order directly from your phone — no waiting, no contact.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXTRAS / FEATURES SECTION -->
+<section class="extras">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <span class="section-tag" style="color:var(--gold-light);">More at La Quench</span>
+      <h2 class="section-title" style="color:var(--white);">Beyond the Table</h2>
+    </div>
+    <div class="extras-grid">
+      <div class="extra-card reveal">
+        <div class="icon">🎁</div>
+        <h3>Digital Gift Cards</h3>
+        <p>Treat someone special to the La Quench experience. Available in ₹500, ₹1000 & ₹2000 denominations.</p>
+        <a href="contact.html" class="btn btn-gold btn-sm">Get a Gift Card</a>
+      </div>
+      <div class="extra-card reveal">
+        <div class="icon">☕</div>
+        <h3>Coffee Subscription Plans</h3>
+        <p>Your daily brew, sorted. Monthly coffee plans starting at ₹999/month for the regular café visitor.</p>
+        <a href="contact.html" class="btn btn-gold btn-sm">Learn More</a>
+      </div>
+      <div class="extra-card reveal">
+        <div class="icon">📱</div>
+        <h3>Mobile Ordering</h3>
+        <p>Order from your seat, skip the queue. Our mobile-optimised ordering is live on all devices.</p>
+        <a href="#" class="btn btn-gold btn-sm">Order Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>La Quench</h3>
+        <p class="fr-tag">The Rooftop Cafe</p>
+        <p>A cozy rooftop escape in the heart of Ahmedabad. Handcrafted beverages, signature desserts, unforgettable memories.</p>
+        <div class="social-row">
+          <a href="#" class="soc-btn">📷</a>
+          <a href="#" class="soc-btn">📘</a>
+          <a href="#" class="soc-btn">💬</a>
+          <a href="#" class="soc-btn">🍽️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="contact.html">Reservation</a></li>
+          <li><a href="index.html#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hours</h4>
+        <ul>
+          <li><a>Mon – Sun</a></li>
+          <li><a>11:00 AM – 11:00 PM</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Find Us</h4>
+        <div class="fi"><span class="fi-icon">📍</span><span>2nd Floor, Ganesh Bhuvan, Jawahar Chowk Road, Maninagar, Ahmedabad, Gujarat 380008</span></div>
+        <div class="fi"><span class="fi-icon">📞</span><a href="tel:+91XXXXXXXXXX">+91 XXXX XXX XXX</a></div>
+        <div class="fi"><span class="fi-icon">📸</span><a href="#">@laquenchcafe</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 La Quench – The Rooftop Cafe. All rights reserved.</span>
+      <a href="contact.html">Reserve a Table →</a>
+    </div>
+  </div>
+</footer>
+
+<div id="orderToast" style="position:fixed;bottom:30px;right:30px;background:var(--primary);color:#fff;padding:14px 24px;border-radius:50px;box-shadow:0 8px 32px rgba(0,0,0,.3);font-size:.875rem;font-weight:600;z-index:9999;display:none;align-items:center;gap:10px;">
+  <span>✓</span><span id="toastMsg">Added to cart!</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

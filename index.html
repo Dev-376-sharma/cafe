@@ -1,373 +1,434 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberSaathi | AI-Powered Cyber Safety Assistant</title>
-    <meta name="description"
-        content="Detect scams, report cybercrime, and get instant AI guidance. CyberSaathi is your digital shield against cyber threats.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>La Quench – The Rooftop Cafe | Ahmedabad</title>
+  <meta name="description" content="La Quench is a premium rooftop café in Ahmedabad offering handcrafted beverages, signature desserts, and cozy rooftop ambience. Rated 4.7 ⭐ on Google."/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
 
-    <!-- NAVBAR -->
-    <header>
-        <nav class="navbar" id="navbar">
-            <div class="container nav-inner">
-                <a href="#" class="logo"><i class="fas fa-shield-halved"></i> Cyber<span>Saathi</span></a>
-                <div class="nav-links">
-                    <a href="#threats">Threats</a>
-                    <a href="#analyzer">Analyzer</a>
-                    <a href="#chat">AI Chat</a>
-                    <a href="#report">Report</a>
-                </div>
-                <a href="#report" class="btn btn-primary nav-cta">Report Crime</a>
-            </div>
-        </nav>
-    </header>
+<!-- ══════════ NAVIGATION ══════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">La Quench</span>
+      <span class="nav-logo-sub">The Rooftop Cafe</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="contact.html">Reservation</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="contact.html" class="nav-cta">Reserve Table</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <main>
-        <!-- ===================== HERO ===================== -->
-        <section class="hero" id="home">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <i class="fas fa-circle-check"></i> Powered by AI &mdash; Hackathon 2026
-                    </div>
-                    <h1 class="gradient-text">AI-Powered Cyber Safety Assistant for Citizens</h1>
-                    <p class="hero-sub">Detect scams. Get instant AI guidance. Report cybercrime easily. Your personal
-                        digital shield—available 24/7.</p>
-                    <div class="hero-buttons">
-                        <a href="#analyzer" class="btn btn-primary"><i class="fas fa-magnifying-glass"></i> Check
-                            Suspicious Message</a>
-                        <a href="#chat" class="btn btn-ghost"><i class="fas fa-robot"></i> Talk to AI Assistant</a>
-                        <a href="#report" class="btn btn-ghost"><i class="fas fa-flag"></i> Report Cybercrime</a>
-                    </div>
-                </div>
-                <div class="shield-visual">
-                    <div class="shield-glow"></div>
-                    <div class="shield-icon-wrap">
-                        <i class="fas fa-shield-halved"></i>
-                    </div>
-                    <div class="floating-card card-1 glass">
-                        <i class="fas fa-circle-check" style="color: var(--success);"></i> Scam Detected
-                    </div>
-                    <div class="floating-card card-2 glass">
-                        <i class="fas fa-bolt" style="color: var(--warning);"></i> Instant Analysis
-                    </div>
-                    <div class="floating-card card-3 glass">
-                        <i class="fas fa-lock" style="color: var(--secondary);"></i> Stay Protected
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="menu.html" onclick="closeMobile()">Menu</a>
+  <a href="contact.html" onclick="closeMobile()">Reservation</a>
+  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="contact.html" onclick="closeMobile()" style="color:var(--gold-light)">Reserve Table</a>
+</div>
 
-        <!-- TRUST STRIP -->
-        <div class="trust-strip">
-            <div class="container trust-strip-inner">
-                <div class="trust-item"><i class="fas fa-shield-halved"></i> Real-time Scam Detection</div>
-                <div class="trust-item"><i class="fas fa-robot"></i> AI-Powered Guidance</div>
-                <div class="trust-item"><i class="fas fa-file-shield"></i> Secure Reporting</div>
-                <div class="trust-item"><i class="fas fa-lock"></i> Privacy First</div>
-            </div>
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-bg-img"></div>
+    <div class="bokeh"></div>
+    <div class="bokeh"></div>
+    <div class="bokeh"></div>
+    <div class="bokeh"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-tag">Ahmedabad's Premium Rooftop Experience</p>
+    <h1 class="hero-title">La <em>Quench</em><br/>The Rooftop Cafe</h1>
+    <p class="hero-subtitle">Coffee &nbsp;•&nbsp; Conversations &nbsp;•&nbsp; Rooftop Views</p>
+    <div class="hero-rating">
+      <span class="stars">★★★★★</span>
+      <small>4.7 on Google &nbsp;|&nbsp; Jawahar Chowk, Ahmedabad</small>
+    </div>
+    <div class="hero-btns">
+      <a href="menu.html" class="btn btn-gold">View Menu</a>
+      <a href="contact.html" class="btn btn-outline">Reserve Table</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section class="about section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <img src="images/interior1.jpg" alt="La Quench interior" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div style="display:none;width:100%;height:480px;background:linear-gradient(135deg,#1c2b4a,#2c1a0e);border-radius:24px;align-items:center;justify-content:center;font-size:4rem;box-shadow:0 20px 60px rgba(44,26,14,.2);">☕</div>
+        <div class="about-badge">
+          <strong>4.7</strong>
+          <span>Google Stars</span>
         </div>
-
-        <!-- ===================== AWARENESS ===================== -->
-        <section id="threats">
-            <div class="container">
-                <div class="threats-header">
-                    <div class="section-label">Awareness</div>
-                    <h2 class="section-title">Common Cyber Threats</h2>
-                    <p class="section-sub">Stay informed about the most prevalent cybercrime methods targeting citizens
-                        today.</p>
-                </div>
-                <div class="threat-grid">
-                    <div class="threat-card glass">
-                        <div class="threat-icon"><i class="fas fa-mobile-screen-button"></i></div>
-                        <h3>UPI Fraud</h3>
-                        <p>Fraudsters trick users into sharing payment credentials or approving fake UPI transaction
-                            requests through social engineering.</p>
-                    </div>
-                    <div class="threat-card glass">
-                        <div class="threat-icon"><i class="fas fa-fish"></i></div>
-                        <h3>Phishing Attacks</h3>
-                        <p>Fake emails, SMS, or links designed to look legitimate, used to steal sensitive information
-                            like passwords and card details.</p>
-                    </div>
-                    <div class="threat-card glass">
-                        <div class="threat-icon"><i class="fas fa-key"></i></div>
-                        <h3>OTP Scams</h3>
-                        <p>Attackers manipulate victims—often posing as bank officials—into sharing one-time passwords
-                            to hijack accounts.</p>
-                    </div>
-                    <div class="threat-card glass">
-                        <div class="threat-icon"><i class="fas fa-user-secret"></i></div>
-                        <h3>Deepfake Calls</h3>
-                        <p>AI-generated voice or video impersonating relatives or officials, used to demand money or
-                            sensitive information.</p>
-                    </div>
-                </div>
+      </div>
+      <div class="about-text reveal">
+        <span class="section-tag">Our Story</span>
+        <h2 class="section-title">More Than Just Coffee</h2>
+        <div class="gold-line"></div>
+        <p class="section-subtitle">
+          La Quench is a rooftop café designed for cozy evenings, handcrafted beverages, and memorable conversations under the city skyline. Nestled in the heart of Ahmedabad, we blend premium coffee culture with warm, inviting aesthetics.
+        </p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <span class="feature-icon">🌇</span>
+            <div>
+              <h4>Rooftop Ambience</h4>
+              <p>Stunning city views with warm evening lighting</p>
             </div>
-        </section>
-
-        <!-- ===================== SCAM ANALYZER ===================== -->
-        <section class="analyzer-section" id="analyzer">
-            <div class="container">
-                <div class="analyzer-wrapper">
-                    <div class="threats-header">
-                        <div class="section-label">AI Tool</div>
-                        <h2 class="section-title">Analyze a Suspicious Message</h2>
-                        <p class="section-sub">Paste any SMS, email, or WhatsApp message. Our AI will evaluate the risk
-                            instantly.</p>
-                    </div>
-                    <div class="analyzer-box glass">
-                        <div class="input-group">
-                            <textarea class="msg-textarea" id="msg-input"
-                                placeholder="Paste SMS / Email / WhatsApp message here..." maxlength="2000"></textarea>
-                            <span class="char-count" id="char-count">0 / 2000</span>
-                        </div>
-                        <div class="analyze-footer">
-                            <p class="analyze-note"><i class="fas fa-lock-open"></i> Your message is analyzed locally
-                                and never stored.</p>
-                            <button class="btn btn-primary" id="analyze-btn">
-                                <span class="spinner"></span>
-                                <span class="btn-text"><i class="fas fa-magnifying-glass"></i> Analyze Now</span>
-                            </button>
-                        </div>
-                        <!-- Result -->
-                        <div class="result-box glass" id="analyzer-result">
-                            <div id="risk-badge-container"></div>
-                            <div class="result-section"><span>Explanation:</span><span id="result-explanation"></span>
-                            </div>
-                            <div class="result-section"><span>Recommended Action:</span><span id="result-action"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">☕</span>
+            <div>
+              <h4>Premium Coffee</h4>
+              <p>Handcrafted brews from carefully sourced beans</p>
             </div>
-        </section>
-
-        <!-- ===================== AI CHAT ===================== -->
-        <section id="chat">
-            <div class="container">
-                <div class="threats-header">
-                    <div class="section-label">AI Assistant</div>
-                    <h2 class="section-title">AI Cyber Assistant</h2>
-                    <p class="section-sub">Ask anything about cybersecurity. Get instant, expert-level guidance.</p>
-                </div>
-                <div class="chat-layout">
-                    <!-- Chat Window -->
-                    <div class="chat-window glass">
-                        <div class="chat-header">
-                            <div class="avatar"><i class="fas fa-robot"></i></div>
-                            <div>
-                                <strong>CyberSaathi AI</strong>
-                                <span class="online-dot"></span>
-                                <div style="font-size: 0.78rem; color: var(--text-muted);">Always online &middot;
-                                    AI-Powered</div>
-                            </div>
-                        </div>
-                        <div class="chat-messages" id="chat-messages">
-                            <div class="msg system">👋 Hello! I'm your <strong>CyberSaathi</strong> assistant. Ask me
-                                anything about cybersecurity or use a quick button on the right to get started.</div>
-                        </div>
-                        <div class="chat-input-row">
-                            <input type="text" class="chat-text-input" id="chat-input"
-                                placeholder="Type your question here..." autocomplete="off">
-                            <button class="btn btn-primary" id="send-btn" title="Send"><i
-                                    class="fas fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                    <!-- Quick Actions -->
-                    <div class="quick-panel glass">
-                        <div class="quick-label">Quick Topics</div>
-                        <button class="quick-btn" data-query="I received a suspicious link"><i class="fas fa-link"></i>
-                            Suspicious link</button>
-                        <button class="quick-btn" data-query="Someone asked for my OTP"><i class="fas fa-key"></i>
-                            Someone asked for OTP</button>
-                        <button class="quick-btn" data-query="I got a fake job offer message"><i
-                                class="fas fa-briefcase"></i> Fake job offer</button>
-                        <button class="quick-btn" data-query="I got a bank verification call"><i
-                                class="fas fa-phone"></i> Bank verification call</button>
-                        <button class="quick-btn" data-query="What is KYC fraud?"><i class="fas fa-id-card"></i> KYC
-                            Fraud</button>
-                    </div>
-                </div>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🍰</span>
+            <div>
+              <h4>Signature Desserts</h4>
+              <p>House-made cheesecakes & chocolate indulgences</p>
             </div>
-        </section>
-
-        <!-- ===================== REPORTING FORM ===================== -->
-        <section class="report-section" id="report">
-            <div class="container">
-                <div class="report-grid">
-                    <div>
-                        <div class="section-label">Cybercrime Reporting</div>
-                        <h2 class="section-title" style="margin-bottom: 2rem;">Report Cybercrime</h2>
-                        <div class="report-form-card glass">
-                            <form id="cybercrime-form" novalidate>
-                                <div class="form-group">
-                                    <label class="form-label" for="f-name">Full Name <em
-                                            style="color: var(--text-muted); font-style: normal;">(optional)</em></label>
-                                    <input type="text" class="form-input" id="f-name" placeholder="John Doe">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="f-contact">Phone or Email *</label>
-                                    <input type="text" class="form-input" id="f-contact"
-                                        placeholder="contact@example.com or +91 XXXXX" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="f-fraud-type">Type of Fraud *</label>
-                                    <select class="form-select" id="f-fraud-type">
-                                        <option value="">-- Select fraud type --</option>
-                                        <option value="UPI Fraud">UPI Fraud</option>
-                                        <option value="Phishing">Phishing Attack</option>
-                                        <option value="OTP Scam">OTP Scam</option>
-                                        <option value="Identity Theft">Identity Theft</option>
-                                        <option value="Deepfake">Deepfake Impersonation</option>
-                                        <option value="Job Scam">Fake Job Offer</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="f-description">Incident Description *</label>
-                                    <textarea class="form-textarea" id="f-description"
-                                        placeholder="Describe what happened in detail..."></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Upload Evidence (Screenshot)</label>
-                                    <label class="file-upload" id="file-upload-label">
-                                        <i class="fas fa-cloud-arrow-up"></i>
-                                        <span id="file-label-text">Click to upload screenshot</span>
-                                        <input type="file" id="f-evidence" accept="image/*,.pdf">
-                                    </label>
-                                </div>
-                                <button type="submit" class="btn btn-primary"
-                                    style="width: 100%; justify-content: center; padding: 1rem;">
-                                    <i class="fas fa-flag"></i> Submit Report
-                                </button>
-                                <div class="success-toast" id="success-toast">
-                                    <i class="fas fa-circle-check"></i> Your report has been successfully submitted. We
-                                    will get back to you shortly.
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- FIR SUMMARY PREVIEW -->
-                    <div>
-                        <div class="section-label">Preview</div>
-                        <h2 class="section-title" style="margin-bottom: 2rem;">Generated Complaint Summary</h2>
-                        <div class="fir-card glass">
-                            <div class="fir-header">
-                                <i class="fas fa-file-shield" style="font-size: 1.5rem; color: var(--secondary);"></i>
-                                <div>
-                                    <strong>CyberSaathi Complaint Draft</strong>
-                                    <div style="font-size: 0.78rem; color: var(--text-muted);">Auto-generated from your
-                                        inputs</div>
-                                </div>
-                            </div>
-                            <div class="fir-row">
-                                <div class="fir-key">Incident Date</div>
-                                <div class="fir-val has-content" id="fir-date">—</div>
-                            </div>
-                            <div class="fir-row">
-                                <div class="fir-key">Fraud Type</div>
-                                <div class="fir-val" id="fir-type">Not selected</div>
-                            </div>
-                            <div class="fir-row">
-                                <div class="fir-key">Description</div>
-                                <div class="fir-val" id="fir-desc">No details provided yet.</div>
-                            </div>
-                            <div class="fir-row">
-                                <div class="fir-key">Financial Loss</div>
-                                <div class="fir-val" id="fir-loss">Not specified</div>
-                            </div>
-                            <div class="fir-row">
-                                <div class="fir-key">Evidence Attached</div>
-                                <div class="fir-val" id="fir-evidence">None</div>
-                            </div>
-                            <div
-                                style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--text-muted);">
-                                <i class="fas fa-circle-info"></i> This summary updates in real-time as you fill the
-                                form above.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🪑</span>
+            <div>
+              <h4>Cozy Seating</h4>
+              <p>Intimate corners for every kind of gathering</p>
             </div>
-        </section>
-
-        <!-- ===================== HOW IT WORKS ===================== -->
-        <section class="how-it-works" id="how">
-            <div class="container">
-                <div class="hiw-header">
-                    <div class="section-label">Process</div>
-                    <h2 class="section-title">How It Works</h2>
-                    <p class="section-sub" style="margin: 0 auto;">From detection to resolution in three simple steps.
-                    </p>
-                </div>
-                <div class="timeline-track">
-                    <div class="timeline-step">
-                        <div class="step-circle"><i class="fas fa-eye"></i></div>
-                        <h3>Detect</h3>
-                        <p>Identify suspicious messages, links, or calls using our AI Scam Analyzer.</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-circle"><i class="fas fa-brain"></i></div>
-                        <h3>Analyze</h3>
-                        <p>Our AI evaluates the threat level and provides actionable guidance instantly.</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-circle"><i class="fas fa-flag"></i></div>
-                        <h3>Report</h3>
-                        <p>Submit a verified complaint with a structured FIR summary to the authorities.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <a href="#" class="logo"><i class="fas fa-shield-halved"></i> Cyber<span>Saathi</span></a>
-                    <p>Empowering Indian citizens with AI-driven cybersecurity awareness, scam detection, and
-                        streamlined crime reporting.</p>
-                    <span class="hackathon-badge"><i class="fas fa-trophy"></i> Hackathon 2026 Prototype</span>
-                </div>
-                <div class="footer-col">
-                    <h4>Platform</h4>
-                    <ul>
-                        <li><a href="#analyzer">Scam Analyzer</a></li>
-                        <li><a href="#chat">AI Assistant</a></li>
-                        <li><a href="#report">Report Crime</a></li>
-                        <li><a href="#threats">Threat Awareness</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">About CyberSaathi</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 CyberSaathi. All rights reserved. Hackathon Prototype.</p>
-                <p>Built with <i class="fas fa-heart" style="color: var(--secondary);"></i> for a safer digital India.
-                </p>
-            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<!-- ══════════ FEATURED ITEMS ══════════ -->
+<section class="featured section" id="featured">
+  <div class="container">
+    <div class="featured-header reveal">
+      <span class="section-tag">Our Bestsellers</span>
+      <h2 class="section-title">Must-Try Favourites</h2>
+      <div class="gold-line" style="margin:1rem auto;"></div>
+      <p class="section-subtitle">Handpicked by our guests and loved by all who visit.</p>
+    </div>
+    <div class="featured-grid">
+      <div class="item-card reveal">
+        <img src="images/hot-chocolate.jpg" alt="Classic Hot Chocolate" class="item-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="item-img-ph" style="display:none">☕</div>
+        <div class="item-body">
+          <h3>Classic Hot Chocolate</h3>
+          <p>Rich, velvety cocoa blended to perfection — pure comfort in a cup.</p>
+          <div class="item-footer">
+            <span class="item-price">₹260</span>
+            <button class="btn-add" onclick="addToOrder('Classic Hot Chocolate', 260)">+ Add to Order</button>
+          </div>
+        </div>
+      </div>
+      <div class="item-card reveal">
+        <img src="images/kahwa.jpg" alt="Royale Kashmiri Kahwa" class="item-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="item-img-ph" style="display:none">🫖</div>
+        <div class="item-body">
+          <h3>Royale Kashmiri Kahwa</h3>
+          <p>Saffron-infused Kashmiri blend with rose petals and dry fruits.</p>
+          <div class="item-footer">
+            <span class="item-price">₹250</span>
+            <button class="btn-add" onclick="addToOrder('Royale Kashmiri Kahwa', 250)">+ Add to Order</button>
+          </div>
+        </div>
+      </div>
+      <div class="item-card reveal">
+        <img src="images/cheesecake.jpg" alt="Nutella Strawberry Cheesecake" class="item-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="item-img-ph" style="display:none">🍰</div>
+        <div class="item-body">
+          <h3>Nutella Strawberry Cheesecake</h3>
+          <p>Creamy cheesecake crowned with Nutella drizzle and fresh strawberries.</p>
+          <div class="item-footer">
+            <span class="item-price">₹320</span>
+            <button class="btn-add" onclick="addToOrder('Nutella Strawberry Cheesecake', 320)">+ Add to Order</button>
+          </div>
+        </div>
+      </div>
+      <div class="item-card reveal">
+        <img src="images/waffles.jpg" alt="Drizzlin Chocolate Cheesecake" class="item-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="item-img-ph" style="display:none">🍫</div>
+        <div class="item-body">
+          <h3>Drizzlin Chocolate Cheesecake</h3>
+          <p>Silky chocolate cheesecake with a warm chocolate drizzle finish.</p>
+          <div class="item-footer">
+            <span class="item-price">₹300</span>
+            <button class="btn-add" onclick="addToOrder('Drizzlin Chocolate Cheesecake', 300)">+ Add to Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;" class="reveal">
+      <a href="menu.html" class="btn btn-dark">View Full Menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section class="gallery section" id="gallery">
+  <div class="container">
+    <div class="gallery-header reveal">
+      <span class="section-tag">Moments at La Quench</span>
+      <h2 class="section-title">A Peek Inside</h2>
+      <div class="gold-line" style="margin:1rem auto;"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item reveal">
+        <img src="images/gallery1.jpg" alt="La Quench interior seating" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="g-ph" style="display:none;min-height:418px;background:linear-gradient(135deg,#1c2b4a,#2c1a0e);">🌙</div>
+        <div class="g-overlay">📸</div>
+      </div>
+      <div class="g-item reveal">
+        <img src="images/gallery2.jpg" alt="La Quench cozy chairs" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="g-ph" style="display:none;min-height:200px;background:linear-gradient(135deg,#3d2314,#6b3a25);">☕</div>
+        <div class="g-overlay">📸</div>
+      </div>
+      <div class="g-item reveal">
+        <img src="images/gallery3.jpg" alt="La Quench desserts" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="g-ph" style="display:none;min-height:200px;background:linear-gradient(135deg,#c9a84c,#9a7a2e);">🍰</div>
+        <div class="g-overlay">📸</div>
+      </div>
+      <div class="g-item reveal">
+        <img src="images/gallery4.jpg" alt="La Quench food spread" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="g-ph" style="display:none;min-height:200px;background:linear-gradient(135deg,#2c3e20,#1c2b4a);">🥗</div>
+        <div class="g-overlay">📸</div>
+      </div>
+      <div class="g-item reveal">
+        <img src="images/gallery5.jpg" alt="La Quench ambience" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="g-ph" style="display:none;min-height:200px;background:linear-gradient(135deg,#4a2040,#2c1a0e);">✨</div>
+        <div class="g-overlay">📸</div>
+      </div>
+      <div class="g-item reveal">
+        <img src="images/gallery6.jpg" alt="La Quench beverages" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="g-ph" style="display:none;min-height:200px;background:linear-gradient(135deg,#1a3040,#2c4a6a);">🌆</div>
+        <div class="g-overlay">📸</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ EVENTS ══════════ -->
+<section class="events section" id="events">
+  <div class="container">
+    <div class="events-grid">
+      <div class="events-text reveal">
+        <span class="section-tag">What's On</span>
+        <h2 class="section-title">Rooftop Events & Evenings</h2>
+        <div class="gold-line"></div>
+        <p class="section-subtitle">Live music, open mic nights, and curated rooftop evenings under the stars.</p>
+        <div class="event-list">
+          <div class="event-item">
+            <span class="event-icon">🎵</span>
+            <div>
+              <h4>Live Music Nights</h4>
+              <p>Every Friday & Saturday — soulful acoustic sets from 7 PM</p>
+            </div>
+          </div>
+          <div class="event-item">
+            <span class="event-icon">🎤</span>
+            <div>
+              <h4>Open Mic Evenings</h4>
+              <p>Last Sunday of every month — poetry, comedy & music</p>
+            </div>
+          </div>
+          <div class="event-item">
+            <span class="event-icon">🌅</span>
+            <div>
+              <h4>Sunset Rooftop Sessions</h4>
+              <p>Daily — catch the golden hour with your favourite brew</p>
+            </div>
+          </div>
+          <div class="event-item">
+            <span class="event-icon">🎂</span>
+            <div>
+              <h4>Private Celebrations</h4>
+              <p>Book the rooftop for birthdays, dates & special occasions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-light);font-size:1rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;">Follow Us</p>
+        <div class="insta-grid">
+          <div class="insta-cell">
+            <img src="images/insta1.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="insta-ph" style="display:none">☕</div>
+            <div class="insta-hover-o">❤️</div>
+          </div>
+          <div class="insta-cell">
+            <img src="images/insta2.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="insta-ph" style="display:none">🍰</div>
+            <div class="insta-hover-o">❤️</div>
+          </div>
+          <div class="insta-cell">
+            <img src="images/insta3.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="insta-ph" style="display:none">🥐</div>
+            <div class="insta-hover-o">❤️</div>
+          </div>
+          <div class="insta-cell">
+            <img src="images/insta4.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="insta-ph" style="display:none">🌇</div>
+            <div class="insta-hover-o">❤️</div>
+          </div>
+          <div class="insta-cell">
+            <img src="images/insta5.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="insta-ph" style="display:none">✨</div>
+            <div class="insta-hover-o">❤️</div>
+          </div>
+          <div class="insta-cell">
+            <img src="images/insta6.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="insta-ph" style="display:none">🌙</div>
+            <div class="insta-hover-o">❤️</div>
+          </div>
+        </div>
+        <div class="insta-handle">
+          <a href="https://instagram.com/laquenchcafe" target="_blank">@laquenchcafe</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ REVIEWS ══════════ -->
+<section class="reviews section" id="reviews">
+  <div class="container">
+    <div class="reviews-header reveal">
+      <span class="section-tag">What Our Guests Say</span>
+      <h2 class="section-title">Real Google Reviews</h2>
+      <div class="gold-line" style="margin:1rem auto;"></div>
+    </div>
+    <div class="rating-badge reveal">
+      <span class="rating-num">4.7</span>
+      <div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-info"><small>Based on Google Reviews &nbsp;·&nbsp; Ahmedabad</small></div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text"><span class="review-q">"</span>We're in town from LA and were looking for a nice coffee shop for an iced latte. We stumbled upon this place through a Google search and decided to check it out — and we're so glad we did! Lovely ambience, friendly staff, and the drinks were great.</p>
+        <div class="reviewer">
+          <div class="rev-avatar">L</div>
+          <div>
+            <div class="rev-name">Lida Saini</div>
+            <div class="rev-sub"><span class="g-dot">G</span> Google Review · 2 months ago &nbsp;·&nbsp; Lunch</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text"><span class="review-q">"</span>Visited La Quench Cafe in Ahmedabad recently and honestly, it was such a pleasant surprise. The place has a really cozy and relaxed vibe, perfect for catching up with friends or even sitting alone with a coffee and getting some work done.</p>
+        <div class="reviewer">
+          <div class="rev-avatar">K</div>
+          <div>
+            <div class="rev-name">Kalyan Vinjamuri</div>
+            <div class="rev-sub"><span class="g-dot">G</span> Local Guide · 1 month ago &nbsp;·&nbsp; Breakfast ₹600–800</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text"><span class="review-q">"</span>Visited La Quench Café recently and absolutely loved it! We ordered the spaghetti pasta, and it was to die for — perfectly cooked, flavorful, and just the right portion size. The garlic bread was decent too. Highly recommend!</p>
+        <div class="reviewer">
+          <div class="rev-avatar">J</div>
+          <div>
+            <div class="rev-name">Jaini Amin</div>
+            <div class="rev-sub"><span class="g-dot">G</span> Local Guide · 5 months ago &nbsp;·&nbsp; Dinner ₹800–1,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer" id="contact-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>La Quench</h3>
+        <p class="fr-tag">The Rooftop Cafe</p>
+        <p>A cozy rooftop escape in the heart of Ahmedabad. We serve handcrafted beverages, signature desserts, and unforgettable memories.</p>
+        <div class="social-row">
+          <a href="https://instagram.com/laquenchcafe" target="_blank" class="soc-btn" title="Instagram">📷</a>
+          <a href="#" class="soc-btn" title="Facebook">📘</a>
+          <a href="#" class="soc-btn" title="WhatsApp">💬</a>
+          <a href="#" class="soc-btn" title="Zomato">🍽️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="contact.html">Reservation</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#events">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <ul>
+          <li><a>Monday – Sunday</a></li>
+          <li><a>11:00 AM – 11:00 PM</a></li>
+          <li style="margin-top:.5rem;"><a style="color:var(--gold-light);">Open 7 Days a Week</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Find Us</h4>
+        <div class="fi">
+          <span class="fi-icon">📍</span>
+          <span>2nd Floor, Ganesh Bhuvan, Jawahar Chowk Road, near Ghadiyali Complex, Balvatika, Maninagar, Ahmedabad, Gujarat 380008</span>
+        </div>
+        <div class="fi">
+          <span class="fi-icon">📞</span>
+          <a href="tel:+91XXXXXXXXXX">+91 XXXX XXX XXX</a>
+        </div>
+        <div class="fi">
+          <span class="fi-icon">📧</span>
+          <a href="mailto:hello@laquench.in">hello@laquench.in</a>
+        </div>
+        <div class="fi">
+          <span class="fi-icon">📸</span>
+          <a href="https://instagram.com/laquenchcafe" target="_blank">@laquenchcafe</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 La Quench – The Rooftop Cafe. All rights reserved.</span>
+      <span>Made with ☕ in Ahmedabad &nbsp;·&nbsp; <a href="contact.html">Reserve a Table</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Order Toast -->
+<div id="orderToast" style="position:fixed;bottom:30px;right:30px;background:var(--primary);color:#fff;padding:14px 24px;border-radius:50px;box-shadow:0 8px 32px rgba(0,0,0,.3);font-size:.875rem;font-weight:600;z-index:9999;display:none;align-items:center;gap:10px;animation:fadeIn .3s ease;">
+  <span>✓</span><span id="toastMsg">Added to order!</span>
+</div>
+
+<script src="script.js"></script>
 </body>
-
 </html>
