@@ -83,17 +83,11 @@ function addToOrder(name, price) {
   orderTotal += price;
   updateCartUI();
   
-  // Open drawer automatically
-  const cd = document.getElementById('cartDrawer');
-  const co = document.getElementById('cartOverlay');
-  if(cd) cd.classList.add('open');
-  if(co) co.classList.add('show');
-  
   // Also show toast
   const toast = document.getElementById('orderToast');
   const toastMsg = document.getElementById('toastMsg');
   if (toast && toastMsg) {
-    toastMsg.textContent = `${name} added!`;
+    toastMsg.textContent = name + ' added!';
     toast.style.display = 'flex';
     clearTimeout(toast._timeout);
     toast._timeout = setTimeout(() => {
@@ -181,9 +175,14 @@ if(orderForm) {
     
     console.log("Order submitted (Mock sending to Excel/Sheets): ", orderDetails);
     
-    // NOTE: To make this ACTUALLY write to Google Sheets, you need to setup a Google App Script 
-    // and POST this `orderDetails` object to the script URL using fetch().
-    // Example: fetch('YOUR_GOOGLE_SCRIPT_URL', { method: 'POST', body: JSON.stringify(orderDetails) })
+    // Send to Google Sheets
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyC6YSvQPRa4winAwDb_C0bYHFicIIxTQWqABUzk9K0Xyu-vYzrl7hSY7odY7weredn_g/exec';
+    fetch(scriptURL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderDetails)
+    }).catch(error => console.error('Error!', error.message));
 
     // UI Updates
     closeCart();

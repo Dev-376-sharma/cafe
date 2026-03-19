@@ -98,7 +98,7 @@
           <span>⏰ 7:00 PM Onwards</span>
           <span>🎟️ ₹500 (Full Cover)</span>
         </div>
-        <button class="btn btn-gold book-btn" onclick="openBooking('IPL Super Sunday', 500)">Book Tickets</button>
+        <button class="btn btn-gold book-btn" onclick="openBooking('IPL Super Sunday', 500, 'This Weekend, 7:00 PM Onwards', 'Cover charge redeemable on food & drinks')">Book Tickets</button>
       </div>
     </div>
 
@@ -113,7 +113,7 @@
           <span>⏰ 8:30 PM Onwards</span>
           <span>🎟️ ₹400 (Entry + Drink)</span>
         </div>
-        <button class="btn btn-gold book-btn" onclick="openBooking('Premier League Derby', 400)">Book Tickets</button>
+        <button class="btn btn-gold book-btn" onclick="openBooking('Premier League Derby', 400, 'Saturday Night, 8:30 PM Onwards', 'Entry + Complimentary Dessert / Drink')">Book Tickets</button>
       </div>
     </div>
 
@@ -128,7 +128,7 @@
           <span>⏰ 8:00 PM - 10:30 PM</span>
           <span>🎟️ ₹200 (Entry)</span>
         </div>
-        <button class="btn btn-gold book-btn" onclick="openBooking('Open Mic Night', 200)">Book Tickets</button>
+        <button class="btn btn-gold book-btn" onclick="openBooking('Open Mic Night', 200, 'Every Thursday, 8:00 PM - 10:30 PM', 'Full Entry Access')">Book Tickets</button>
       </div>
     </div>
 
@@ -143,7 +143,7 @@
           <span>⏰ 7:30 PM Onwards</span>
           <span>🎟️ Free Entry (Table Booking Req.)</span>
         </div>
-        <button class="btn btn-gold book-btn" onclick="openBooking('Acoustic Friday', 0)">Reserve Table</button>
+        <button class="btn btn-gold book-btn" onclick="openBooking('Acoustic Friday', 0, 'Friday Evening, 7:30 PM Onwards', 'Table Booking (Free Entry)')">Reserve Table</button>
       </div>
     </div>
 
@@ -156,7 +156,11 @@
     <button class="booking-close" onclick="closeBooking()">✕</button>
     <div class="section-tag" style="font-size: 0.9rem;">Ticket Booking</div>
     <h2 id="b-event-name">Event Name</h2>
-    <p style="color:var(--text-mid); font-size:0.9rem; margin-bottom:1.5rem;" id="b-event-price">Price: ₹0</p>
+    <p style="color:var(--text-mid); font-size:0.9rem; margin-bottom:0.5rem;" id="b-event-price">Price: ₹0</p>
+    <div id="b-event-details" style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.5rem; background: var(--cream); padding: 1rem; border-radius: 8px;">
+      <div style="margin-bottom: 5px;"><strong>Date/Time:</strong> <span id="b-event-time">...</span></div>
+      <div><strong>Included:</strong> <span id="b-event-included">...</span></div>
+    </div>
     
     <form id="eventBookingForm">
       <div class="form-group">
@@ -239,10 +243,12 @@
   // Event Booking Logic specific to this page
   let currentEventPrice = 0;
   
-  function openBooking(eventName, basePrice) {
+  function openBooking(eventName, basePrice, timeInfo, includedInfo) {
     document.getElementById('bookingModal').style.display = 'flex';
     document.getElementById('b-event-name').textContent = eventName;
-    document.getElementById('b-event-price').textContent = basePrice > 0 ? \`₹\${basePrice} per ticket\` : 'Free Entry';
+    document.getElementById('b-event-price').textContent = basePrice > 0 ? '₹' + basePrice + ' per ticket' : 'Free Entry';
+    document.getElementById('b-event-time').textContent = timeInfo || 'Check event details';
+    document.getElementById('b-event-included').textContent = includedInfo || 'Entry only';
     currentEventPrice = basePrice;
     document.getElementById('b-tickets').value = 1;
     updateBookingTotal();
@@ -257,7 +263,7 @@
 
   function updateBookingTotal() {
     const qty = parseInt(document.getElementById('b-tickets').value) || 1;
-    document.getElementById('b-total-display').textContent = \`₹\${qty * currentEventPrice}\`;
+    document.getElementById('b-total-display').textContent = '₹' + (qty * currentEventPrice);
   }
 
   document.getElementById('eventBookingForm').addEventListener('submit', function(e) {
@@ -267,14 +273,23 @@
     const eventName = document.getElementById('b-event-name').textContent;
     const passCode = 'LQ-' + Math.floor(1000 + Math.random() * 9000);
     
-    // Simulate sending to Google Sheets
-    console.log("Event Booking recorded:", { event: eventName, name, tickets: qty, amount: qty * currentEventPrice, pass: passCode });
+    const payload = { event: eventName, name, tickets: qty, amount: qty * currentEventPrice, pass: passCode };
+    console.log("Event Booking recorded:", payload);
+
+    // Send to Google Sheets
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyC6YSvQPRa4winAwDb_C0bYHFicIIxTQWqABUzk9K0Xyu-vYzrl7hSY7odY7weredn_g/exec';
+    fetch(scriptURL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(error => console.error('Error!', error.message));
 
     // Show pass
     closeBooking();
     document.getElementById('success-emoji').textContent = '🎟️';
     document.getElementById('success-title').textContent = 'Booking Confirmed!';
-    document.getElementById('success-desc').textContent = \`\${qty}x Tickets for \${eventName}\`;
+    document.getElementById('success-desc').textContent = qty + 'x Tickets for ' + eventName;
     document.getElementById('success-pass-label').textContent = 'Entry Pass Code';
     document.getElementById('tokenNumberDisplay').textContent = passCode;
     document.getElementById('tokenModal').style.display = 'flex';

@@ -21,7 +21,8 @@
       <li><a href="menu.html" class="active">Menu</a></li>
       <li><a href="contact.html">Reservation</a></li>
       <li><a href="index.html#gallery">Gallery</a></li>
-      <li><a href="events.html">Events</a></li>`n      <li><a href="contact.html" class="nav-cta">Reserve Table</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="contact.html" class="nav-cta">Reserve Table</a></li>
     </ul>
     <button class="nav-cart-btn" onclick="openCart()" aria-label="Open Cart">
       🛒<span class="cart-badge">0</span>
@@ -37,7 +38,8 @@
   <a href="index.html" onclick="closeMobile()">Home</a>
   <a href="menu.html" onclick="closeMobile()">Menu</a>
   <a href="contact.html" onclick="closeMobile()">Reservation</a>
-  <a href="index.html#gallery" onclick="closeMobile()">Gallery</a>`n  <a href="events.html" onclick="closeMobile()">Events</a>
+  <a href="index.html#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="events.html" onclick="closeMobile()">Events</a>
   <a href="contact.html" onclick="closeMobile()" style="color:var(--gold-light)">Reserve Table</a>
 </div>
 
@@ -193,6 +195,31 @@
       <p style="font-size:.88rem;color:var(--text-light);max-width:440px;margin:0 auto .5rem;">Scan the QR code at your table to order directly from your phone — no waiting, no contact.</p>
     </div>
 
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS SECTION -->
+<section class="extras" style="background:var(--cream-dark); padding:60px 0;">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <span class="section-tag" style="color:var(--gold-dark);">Smart Pairings</span>
+      <h2 class="section-title" style="color:var(--primary);">You Might Also Like</h2>
+      <p class="section-subtitle">Curated combinations that go perfectly together.</p>
+    </div>
+    <div class="extras-grid">
+      <div class="extra-card reveal" style="background:var(--white); border:1px solid var(--beige);">
+        <div class="icon">☕+🍰</div>
+        <h3 style="color:var(--primary);">The Classic Duo</h3>
+        <p style="color:var(--text-mid);">Pair our Classic Hot Chocolate with the Nutella Strawberry Cheesecake for the ultimate comfort experience.</p>
+        <button class="btn btn-gold btn-sm" onclick="addToOrder('Classic Duo Combo', 550)">Add Combo (₹550)</button>
+      </div>
+      <div class="extra-card reveal" style="background:var(--white); border:1px solid var(--beige);">
+        <div class="icon">🫖+🍫</div>
+        <h3 style="color:var(--primary);">Spiced & Sweet</h3>
+        <p style="color:var(--text-mid);">Balance the rich Drizzling Chocolate Brownie with a warm cup of Kashmiri Kahwa.</p>
+        <button class="btn btn-gold btn-sm" onclick="addToOrder('Spiced & Sweet Combo', 500)">Add Combo (₹500)</button>
+      </div>
+    </div>
   </div>
 </section>
 

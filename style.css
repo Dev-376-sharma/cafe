@@ -288,8 +288,14 @@ h1,h2,h3,h4 { font-family:'Playfair Display',serif; line-height:1.2; color:var(-
 .extra-card p { font-size:.82rem; color:rgba(255,255,255,.55); line-height:1.7; margin-bottom:1.25rem; }
 
 /* ─── Scroll Animations ─── */
-.reveal { opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease; }
+.reveal { opacity:0; transform:translateY(40px); transition:opacity .8s cubic-bezier(0.2, 0.8, 0.2, 1), transform .8s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .reveal.visible { opacity:1; transform:translateY(0); }
+.reveal.zoom { transform:scale(0.95); }
+.reveal.zoom.visible { transform:scale(1); }
+.reveal.left { transform:translateX(-40px); }
+.reveal.left.visible { transform:translateX(0); }
+.reveal.right { transform:translateX(40px); }
+.reveal.right.visible { transform:translateX(0); }
 
 /* ─── Responsive ─── */
 @media(max-width:1024px) {
