@@ -83,12 +83,13 @@ function addToOrder(name, price) {
   orderTotal += price;
   updateCartUI();
   
-  // Also show toast
+  // Also show toast (DO NOT open cart automatically)
   const toast = document.getElementById('orderToast');
   const toastMsg = document.getElementById('toastMsg');
   if (toast && toastMsg) {
     toastMsg.textContent = name + ' added!';
     toast.style.display = 'flex';
+    toast.style.opacity = '1';
     clearTimeout(toast._timeout);
     toast._timeout = setTimeout(() => {
       toast.style.display = 'none';
@@ -175,13 +176,20 @@ if(orderForm) {
     
     console.log("Order submitted (Mock sending to Excel/Sheets): ", orderDetails);
     
-    // Send to Google Sheets
+    // Send to Google Sheets using URLSearchParams for better no-cors compatibility
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyC6YSvQPRa4winAwDb_C0bYHFicIIxTQWqABUzk9K0Xyu-vYzrl7hSY7odY7weredn_g/exec';
+    
+    // Creating a form-style payload
+    const formData = new URLSearchParams();
+    for (const key in orderDetails) {
+      formData.append(key, orderDetails[key]);
+    }
+
     fetch(scriptURL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(orderDetails)
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
     }).catch(error => console.error('Error!', error.message));
 
     // UI Updates
@@ -241,10 +249,13 @@ if (dateInput) {
 }
 
 /* ── Active nav link ── */
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+const path = window.location.pathname;
+const currentPage = path.split('/').pop() || 'index.html';
+
 document.querySelectorAll('.nav-links a').forEach(link => {
   const href = link.getAttribute('href');
-  if (href === currentPage) {
+  // Handle both "index.html" and root "/" cases
+  if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
     link.classList.add('active');
   } else {
     link.classList.remove('active');
