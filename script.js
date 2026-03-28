@@ -98,30 +98,57 @@ function addToOrder(name, price) {
 }
 
 function updateCartUI() {
-  const cartItemsContainer = document.getElementById('cartItems');
-  const cartTotalAmt = document.getElementById('cartTotalAmt');
+  const container = document.getElementById('cartItems');
   const cartBadges = document.querySelectorAll('.cart-badge');
   
-  if(!cartItemsContainer) return;
+  if(!container) return;
   
-  cartItemsContainer.innerHTML = '';
-  if(orderItems.length === 0){
-    cartItemsContainer.innerHTML = '<p style="text-align:center;color:var(--text-light);margin-top:20px;">Your cart is empty.</p>';
+  // 1. Render Items
+  if(orderItems.length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:var(--text-light);margin-top:20px;">Your cart is empty.</p>';
   } else {
-    orderItems.forEach((item, index) => {
-      cartItemsContainer.innerHTML += `
-        <div class="cart-item">
-          <div class="cart-item-info">
-            <h4>${item.name}</h4>
-            <p>₹${item.price}</p>
-          </div>
+    container.innerHTML = orderItems.map((item, index) => `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <h4>${item.name}</h4>
+          <p>₹${item.price}</p>
+        </div>
+        <div class="cart-item-controls">
+          <span class="cart-item-price">₹${item.price}</span>
           <button class="cart-item-remove" onclick="removeCartItem(${index})">Remove</button>
         </div>
-      `;
-    });
+      </div>
+    `).join('');
   }
+
+  // 2. Calculations
+  const tax = orderTotal * 0.05;
+  const deliveryFee = currentService === 'delivery' ? 40 : 0;
+  const finalTotal = orderTotal + tax + deliveryFee - currentDiscount;
+
+  // 3. Update Bill Table (Drawer)
+  const subEl = document.getElementById('billSubtotal');
+  const taxEl = document.getElementById('billTax');
+  const discEl = document.getElementById('billDiscount');
+  const totalEl = document.getElementById('billTotal');
+  const btnTotalEl = document.getElementById('placeOrderTotal');
+  const discRow = document.getElementById('discountRow');
+
+  if(subEl) subEl.textContent = `₹${orderTotal}`;
+  if(taxEl) taxEl.textContent = `₹${tax.toFixed(0)}`; // Round GST for cleaner UI
+  if(totalEl) totalEl.textContent = `₹${finalTotal.toFixed(0)}`;
+  if(btnTotalEl) btnTotalEl.textContent = `₹${finalTotal.toFixed(0)}`;
   
-  if(cartTotalAmt) cartTotalAmt.textContent = `₹${orderTotal}`;
+  if(discEl && discRow) {
+    if(currentDiscount > 0) {
+      discEl.textContent = `-₹${currentDiscount.toFixed(0)}`;
+      discRow.style.display = 'flex';
+    } else {
+      discRow.style.display = 'none';
+    }
+  }
+
+  // 4. Update Badges
   cartBadges.forEach(badge => badge.textContent = orderItems.length);
 }
 
@@ -138,6 +165,11 @@ function openCart() {
   if(co) co.classList.add('show');
 }
 
+// Enhanced Cart Logic Variables
+let currentService = 'pickup'; // default
+let currentDiscount = 0;
+let lastOrderID = '';
+
 function closeCart() {
   const cd = document.getElementById('cartDrawer');
   const co = document.getElementById('cartOverlay');
@@ -150,49 +182,126 @@ const cartOverlay = document.getElementById('cartOverlay');
 if(closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
 if(cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
-// Handle Order Form Submission to Spreadsheet & Token
-const orderForm = document.getElementById('orderForm');
-if(orderForm) {
-  orderForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    if(orderItems.length === 0) {
-      alert("Please add items to your cart first.");
-      return;
-    }
-    
-    const tableNo = document.getElementById('tableNo').value;
-    const payment = document.getElementById('paymentMethod').value;
-    const token = Math.floor(100 + Math.random() * 900); // 3 digit token
-    
-    // Create the payload for Google Sheets via Formspree or custom webhook
-    const orderDetails = {
-      token: token,
-      table: tableNo,
-      payment: payment,
-      total: orderTotal,
-      items: orderItems.map(i => i.name).join(", "),
-      time: new Date().toLocaleString()
-    };
-    
-    console.log("Order submitted (Mock sending to Excel/Sheets): ", orderDetails);
-    
-    // Send to Google Sheets using our new unified function
-    sendToSheets(orderDetails);
-
-    // UI Updates
-    closeCart();
-    const tokenModal = document.getElementById('tokenModal');
-    if(tokenModal) {
-      document.getElementById('tokenNumberDisplay').textContent = '#' + token;
-      tokenModal.style.display = 'flex';
-    }
-    
-    // Clear cart
-    orderItems = [];
-    orderTotal = 0;
-    updateCartUI();
-    orderForm.reset();
+// Toggle Pickup / Delivery
+function setService(type) {
+  currentService = type;
+  const btns = document.querySelectorAll('.service-btn');
+  btns.forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-service') === type);
   });
+  
+  const deliveryFields = document.getElementById('deliveryFields');
+  const deliveryRow = document.getElementById('deliveryRow');
+  
+  if(type === 'delivery') {
+    if(deliveryFields) deliveryFields.style.display = 'block';
+    if(deliveryRow) deliveryRow.style.display = 'flex';
+  } else {
+    if(deliveryFields) deliveryFields.style.display = 'none';
+    if(deliveryRow) deliveryRow.style.display = 'none';
+  }
+  updateCartUI();
+}
+
+// Coupon Logic
+function applyCoupon() {
+  const code = document.getElementById('couponCode').value.trim().toUpperCase();
+  const msg = document.getElementById('couponMsg');
+  
+  if(code === 'WELCOME10') {
+    currentDiscount = orderTotal * 0.10; // 10% off
+    msg.textContent = '✓ 10% Discount Applied!';
+    msg.style.color = '#10b981';
+  } else if(code === 'OFFER20') {
+    currentDiscount = orderTotal * 0.20; // 20% off
+    msg.textContent = '✓ 20% Discount Applied!';
+    msg.style.color = '#10b981';
+  } else {
+    currentDiscount = 0;
+    msg.textContent = '× Invalid Coupon Code';
+    msg.style.color = '#ef4444';
+  }
+  msg.style.display = 'block';
+  updateCartUI();
+}
+
+// Submission Logic
+function submitEnhancedOrder() {
+  if(orderItems.length === 0) {
+    alert("Please add items to your cart first.");
+    return;
+  }
+
+  const name = document.getElementById('custName').value;
+  const phone = document.getElementById('custPhone').value;
+  const email = document.getElementById('custEmail').value;
+
+  if(!name || !phone || !email) {
+    alert("Please fill in your name, phone, and email.");
+    return;
+  }
+
+  const orderID = 'LQ-' + Math.floor(1000 + Math.random() * 9000);
+  lastOrderID = orderID;
+
+  // Final Calculations
+  const tax = orderTotal * 0.05;
+  const deliveryFee = currentService === 'delivery' ? 40 : 0;
+  const finalTotal = orderTotal + tax + deliveryFee - currentDiscount;
+
+  const orderDetails = {
+    orderID: orderID,
+    customerName: name,
+    customerPhone: phone,
+    customerEmail: email,
+    serviceType: currentService,
+    address: document.getElementById('custAddress')?.value || 'N/A',
+    deliveryTime: document.getElementById('deliveryTime')?.value || 'ASAP',
+    subtotal: orderTotal,
+    tax: tax.toFixed(2),
+    deliveryCharge: deliveryFee,
+    discount: currentDiscount.toFixed(2),
+    finalTotal: finalTotal.toFixed(2),
+    paymentMethod: document.getElementById('paymentMethod').value,
+    notes: document.getElementById('orderNotes')?.value || '',
+    items: orderItems.map(i => `${i.name} (x1)`).join(", "),
+    timestamp: new Date().toLocaleString()
+  };
+
+  console.log("Submitting Enhanced Order:", orderDetails);
+  
+  // Custom script: Send to Sheets
+  sendToSheets(orderDetails);
+
+  // Show Confirmation
+  closeCart();
+  const modal = document.getElementById('orderConfirmModal');
+  const displayID = document.getElementById('displayOrderID');
+  if(modal && displayID) {
+    displayID.textContent = '#' + orderID;
+    modal.style.display = 'flex';
+  }
+
+  // Reset Cart
+  orderItems = [];
+  orderTotal = 0;
+  currentDiscount = 0;
+  updateCartUI();
+}
+
+function closeConfirmModal() {
+  const modal = document.getElementById('orderConfirmModal');
+  if(modal) modal.style.display = 'none';
+}
+
+function shareToWhatsApp() {
+  const text = `*New Order from La Quench!* 🍽️\n` +
+               `Order ID: ${lastOrderID}\n` +
+               `Total Amount: ₹${document.getElementById('billTotal').textContent}\n` +
+               `Items: ${orderItems.length} items ordered.\n` +
+               `Thanks for choosing La Quench! Please leave a review here: [Review Link]`;
+  
+  window.open(`https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(text)}`, '_blank');
 }
 
 /**

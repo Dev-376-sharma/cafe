@@ -463,42 +463,133 @@
 <div class="cart-overlay" id="cartOverlay"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
-    <h3>Your Order</h3>
+    <h3>🧾 Your Order Summary</h3>
     <button id="closeCart">✕</button>
   </div>
-  <div class="cart-items" id="cartItems">
-    <p style="text-align:center;color:var(--text-light);margin-top:20px;">Your cart is empty.</p>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-total"><span>Total:</span> <strong id="cartTotalAmt">₹0</strong></div>
-    <form id="orderForm">
-      <div class="form-group">
-        <label>Table Number</label>
-        <input type="number" id="tableNo" required placeholder="e.g. 4" min="1">
+  
+  <div class="cart-body">
+    <!-- Items Section -->
+    <div class="cart-section">
+      <div class="cart-section-title">🛒 Items</div>
+      <div class="cart-items" id="cartItems">
+        <p style="text-align:center;color:var(--text-light);margin-top:20px;">Your cart is empty.</p>
       </div>
+    </div>
+
+    <!-- Customer Details -->
+    <div class="cart-section">
+      <div class="cart-section-title">👤 Customer Details</div>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="custName" required placeholder="John Doe">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="custPhone" required placeholder="+91 98765 43210">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="custEmail" required placeholder="john@example.com">
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Option -->
+    <div class="cart-section">
+      <div class="cart-section-title">📍 Order Option</div>
+      <div class="service-toggle">
+        <button type="button" class="service-btn active" data-service="pickup" onclick="setService('pickup')">🏠 Pickup</button>
+        <button type="button" class="service-btn" data-service="delivery" onclick="setService('delivery')">🚚 Delivery</button>
+      </div>
+      
+      <div id="deliveryFields" style="display:none;">
+        <div class="form-group">
+          <label>Delivery Address</label>
+          <textarea id="custAddress" placeholder="Room No, Building, Street, Landmark..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Preferred Delivery Time</label>
+          <input type="time" id="deliveryTime">
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment & Notes -->
+    <div class="cart-section">
+      <div class="cart-section-title">💳 Payment & Notes</div>
       <div class="form-group">
         <label>Payment Method</label>
         <select id="paymentMethod" required>
-          <option value="Cash">Cash</option>
-          <option value="Online">Online / UPI</option>
+          <option value="UPI">UPI / GPay / PhonePe</option>
+          <option value="Card">Credit / Debit Card</option>
+          <option value="COD">Cash on Delivery / Pickup</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-gold" style="width:100%">Submit Order</button>
-    </form>
+      <div class="form-group">
+        <label>Special Instructions</label>
+        <textarea id="orderNotes" placeholder="e.g. Make it extra spicy, No onions..."></textarea>
+      </div>
+    </div>
+
+    <!-- Coupon Section -->
+    <div class="cart-section" style="background:var(--cream-dark);">
+      <div class="cart-section-title">🎁 Offers</div>
+      <div class="coupon-box">
+        <input type="text" id="couponCode" placeholder="Enter Code (WELCOME10)">
+        <button type="button" class="btn-apply" onclick="applyCoupon()">Apply</button>
+      </div>
+      <p id="couponMsg" style="font-size:.7rem; margin-top:5px; display:none;"></p>
+    </div>
+
+    <!-- Final Bill -->
+    <div class="cart-section" style="background:var(--primary); color:white; border:none;">
+      <div class="bill-table">
+        <div class="bill-row"><span>Subtotal</span> <span id="billSubtotal">₹0</span></div>
+        <div class="bill-row"><span>GST (5%)</span> <span id="billTax">₹0</span></div>
+        <div class="bill-row" id="deliveryRow" style="display:none;"><span>Delivery Fee</span> <span>₹40</span></div>
+        <div class="bill-row discount-row" id="discountRow" style="display:none;"><span>Discount</span> <span id="billDiscount">-₹0</span></div>
+        <div class="bill-row total-row" style="color:var(--gold-light);"><span>Total Amount</span> <span id="billTotal">₹0</span></div>
+      </div>
+      
+      <button type="button" class="btn-checkout" onclick="submitEnhancedOrder()">
+        <span>Place Order</span>
+        <span id="placeOrderTotal">₹0</span>
+      </button>
+
+      <div class="trust-elements">
+        <div class="trust-item"><span class="trust-icon">🔒</span><span>Secure Payment</span></div>
+        <div class="trust-item"><span class="trust-icon">⭐</span><span>4.8/5 Rating</span></div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- Token Modal -->
-<div class="modal" id="tokenModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
-  <div class="modal-content" style="background:#fff;padding:2rem;border-radius:16px;text-align:center;max-width:400px;width:90%;box-shadow:0 10px 40px rgba(0,0,0,0.2);">
-    <div style="font-size:3rem;margin-bottom:1rem;">🍽️</div>
-    <h2 style="color:var(--primary);margin-bottom:.5rem;">Order Received!</h2>
-    <p style="color:var(--text-mid);margin-bottom:1.5rem;">Please show this token at the counter or wait at your table.</p>
-    <div style="background:var(--cream-dark);padding:1rem;border-radius:8px;margin-bottom:1.5rem;border:2px dashed var(--gold);">
-      <span style="display:block;font-size:.8rem;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;">Token Number</span>
-      <strong id="tokenNumberDisplay" style="font-size:2.5rem;color:var(--primary);font-family:'Playfair Display',serif;">#000</strong>
+<!-- ORDER CONFIRMATION MODAL -->
+<div class="modal-overlay" id="orderConfirmModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <span class="success-icon">🎉</span>
+      <h2>Order Placed!</h2>
+      <p>Your delicious meal is being prepared.</p>
     </div>
-    <button type="button" class="btn btn-dark" onclick="closeTokenModal()" style="width:100%;justify-content:center;">Back to Menu</button>
+    <div class="modal-body">
+      <p style="color:var(--text-light); font-size:.85rem; text-transform:uppercase; letter-spacing:1px;">Order ID</p>
+      <div class="order-id-badge" id="displayOrderID">#LQ-0000</div>
+      
+      <p style="margin:1.5rem 0; font-size:.9rem; color:var(--text-mid);">
+        We have received your order. You will receive a confirmation message shortly.
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <button class="btn btn-gold" style="width:100%; justify-content:center;" onclick="shareToWhatsApp()">
+          📲 Send Invoice to WhatsApp
+        </button>
+        <button class="btn btn-dark" style="width:100%; justify-content:center; background:none; border:1px solid var(--beige); color:var(--text-mid);" onclick="closeConfirmModal()">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
