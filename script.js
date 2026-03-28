@@ -199,22 +199,119 @@ if(orderForm) {
  * Unified function to send data to Google Sheets
  * Max compatibility with 'no-cors' mode
  */
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyVUwDwk0QqfP7csZ7AQ-LEhYELANoOrjhYixouXvnuOWlMMs8UrAVIflF7ava6_BrEcA/exec';
+
+/**
+ * Fetch Menu items from Google Sheets
+ */
+async function fetchMenu() {
+  console.log("Fetching live menu from Sheets...");
+  try {
+    const response = await fetch(scriptURL);
+    const data = await response.json();
+    console.log("Menu data received:", data);
+    
+    if(data && data.length > 0 && !data.error) {
+      renderMenu(data);
+    } else {
+      showMenuError("No items found in your Google Sheet. Please add some to the 'Menu' tab!");
+    }
+  } catch (err) {
+    console.error("Error fetching live menu:", err);
+    showMenuError("Could not connect to the live menu. Please check your Web App deployment.");
+  }
+}
+
+function showMenuError(msg) {
+  const loaders = document.querySelectorAll('.loading-text');
+  loaders.forEach(l => {
+    l.textContent = msg;
+    l.style.color = 'var(--gold-light)';
+  });
+}
+
+/**
+ * Render Menu items into HTML
+ */
+function renderMenu(items) {
+  const drinksGrid = document.querySelector('#cat-drinks .menu-grid');
+  const dessertsGrid = document.querySelector('#cat-desserts .menu-grid');
+  const featuredGrid = document.querySelector('.featured-grid');
+
+  if(drinksGrid) drinksGrid.innerHTML = '';
+  if(dessertsGrid) dessertsGrid.innerHTML = '';
+  // (Optional: clear featured grid if you want it live too)
+
+  items.forEach(item => {
+    const cardHTML = `
+      <div class="menu-card reveal visible" data-cat="${item.category}" style="position:relative;">
+        ${item.popular === 'yes' ? '<span class="popular-badge">🏆 Bestseller</span>' : ''}
+        <div class="menu-card-emoji">${item.emoji || '🍽️'}</div>
+        <h3>${item.name}</h3>
+        <p>${item.description}</p>
+        <div class="menu-card-footer">
+          <span class="menu-price">₹${item.price}</span>
+          <button class="btn-cart" onclick="addToOrder('${item.name}', ${item.price})">+ Add to Cart</button>
+        </div>
+      </div>
+    `;
+
+    // Menu Page injection
+    if(item.category === 'drinks' && drinksGrid) {
+      drinksGrid.innerHTML += cardHTML;
+    } else if(item.category === 'desserts' && dessertsGrid) {
+      dessertsGrid.innerHTML += cardHTML;
+    }
+
+    // Home Page (Index) injection for Bestsellers
+    if(item.popular === 'yes' && featuredGrid) {
+        // Map to Home page card style
+        const featuredCardHTML = `
+          <div class="item-card reveal visible">
+            <div class="item-img-ph" style="display:flex;height:200px;background:var(--cream-dark);align-items:center;justify-content:center;font-size:4rem;border-radius:12px 12px 0 0;">${item.emoji || '☕'}</div>
+            <div class="item-body">
+              <h3>${item.name}</h3>
+              <p>${item.description}</p>
+              <div class="item-footer">
+                <span class="item-price">₹${item.price}</span>
+                <button class="btn-add" onclick="addToOrder('${item.name}', ${item.price})">+ Add to Order</button>
+              </div>
+            </div>
+          </div>
+        `;
+        // Clear loading text on first item
+        if(featuredGrid.querySelector('.loading-text')) featuredGrid.innerHTML = '';
+        featuredGrid.innerHTML += featuredCardHTML;
+    }
+  });
+}
+
+// Initial Fetch on Content Loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if we are on the menu page or index page
+    if(document.querySelector('.menu-grid') || document.querySelector('.featured-grid')) {
+        fetchMenu();
+    }
+});
+
+/**
+ * Unified function to send data to Google Sheets
+ * Max compatibility with 'no-cors' mode
+ */
 function sendToSheets(data) {
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbyC6YSvQPRa4winAwDb_C0bYHFicIIxTQWqABUzk9K0Xyu-vYzrl7hSY7odY7weredn_g/exec';
-  
   const formData = new URLSearchParams();
   for (const key in data) {
     formData.append(key, data[key]);
   }
 
-  console.log("Dispatching to Google Sheets:", data);
+  console.log("Dispatching Order to Google Sheets:", data);
 
   fetch(scriptURL, {
     method: 'POST',
     mode: 'no-cors',
     body: formData
   })
-  .then(() => console.log("Success: Data dispatched to Google Sheets."))
+  .then(() => console.log("Success: Order dispatched to Google Sheets."))
   .catch(err => console.error("Error sending to Sheets:", err));
 }
 
@@ -228,10 +325,30 @@ function submitReservation(e) {
   e.preventDefault();
   const name = document.getElementById('res-name')?.value;
   const phone = document.getElementById('res-phone')?.value;
-  if (!name || !phone) {
+  const date = document.getElementById('res-date')?.value;
+  const time = document.getElementById('res-time')?.value;
+  const guests = document.getElementById('res-guests')?.value;
+  const occasion = document.getElementById('res-occasion')?.value;
+  const requests = document.getElementById('res-requests')?.value;
+
+  if (!name || !phone || !date || !time || !guests) {
     alert('Please fill in required fields.');
     return;
   }
+
+  // Send to Google Sheets
+  sendToSheets({
+    type: 'Reservation',
+    name: name,
+    phone: phone,
+    date: date,
+    time: time,
+    guests: guests,
+    occasion: occasion || 'N/A',
+    requests: requests || 'None',
+    submittedAt: new Date().toLocaleString()
+  });
+
   const modal = document.getElementById('successModal');
   if (modal) {
     modal.style.display = 'flex';
