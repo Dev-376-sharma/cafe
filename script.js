@@ -176,22 +176,8 @@ if(orderForm) {
     
     console.log("Order submitted (Mock sending to Excel/Sheets): ", orderDetails);
     
-    // Send to Google Sheets using a URLSearchParams (Form Data) for max compatibility
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyC6YSvQPRa4winAwDb_C0bYHFicIIxTQWqABUzk9K0Xyu-vYzrl7hSY7odY7weredn_g/exec';
-    
-    const formData = new URLSearchParams();
-    for (const key in orderDetails) {
-      formData.append(key, orderDetails[key]);
-    }
-
-    // mode: 'no-cors' works best with form-encoded data
-    fetch(scriptURL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: formData
-    }).then(() => {
-      console.log("Data sent to Google Sheets successfully (Check sheet)");
-    }).catch(error => console.error('Error!', error.message));
+    // Send to Google Sheets using our new unified function
+    sendToSheets(orderDetails);
 
     // UI Updates
     closeCart();
@@ -207,6 +193,29 @@ if(orderForm) {
     updateCartUI();
     orderForm.reset();
   });
+}
+
+/**
+ * Unified function to send data to Google Sheets
+ * Max compatibility with 'no-cors' mode
+ */
+function sendToSheets(data) {
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyC6YSvQPRa4winAwDb_C0bYHFicIIxTQWqABUzk9K0Xyu-vYzrl7hSY7odY7weredn_g/exec';
+  
+  const formData = new URLSearchParams();
+  for (const key in data) {
+    formData.append(key, data[key]);
+  }
+
+  console.log("Dispatching to Google Sheets:", data);
+
+  fetch(scriptURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  })
+  .then(() => console.log("Success: Data dispatched to Google Sheets."))
+  .catch(err => console.error("Error sending to Sheets:", err));
 }
 
 function closeTokenModal() {

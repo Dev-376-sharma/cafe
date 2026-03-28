@@ -276,21 +276,12 @@
     const payload = { event: eventName, name, tickets: qty, amount: qty * currentEventPrice, pass: passCode };
     console.log("Event Booking recorded:", payload);
 
-    // Send to Google Sheets using URLSearchParams
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyC6YSvQPRa4winAwDb_C0bYHFicIIxTQWqABUzk9K0Xyu-vYzrl7hSY7odY7weredn_g/exec';
-    
-    const formData = new URLSearchParams();
-    for (const key in payload) {
-      formData.append(key, payload[key]);
+    // Send to Google Sheets using the unified function from script.js
+    if (typeof sendToSheets === 'function') {
+      sendToSheets(payload);
+    } else {
+      console.error("sendToSheets function not found. Make sure script.js is loaded.");
     }
-
-    fetch(scriptURL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: formData
-    }).then(() => {
-      console.log("Data sent to Google Sheets successfully (Check sheet)");
-    }).catch(error => console.error('Error!', error.message));
 
     // Show pass
     closeBooking();
