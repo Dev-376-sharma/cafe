@@ -39,7 +39,8 @@
   <a href="index.html" onclick="closeMobile()">Home</a>
   <a href="menu.html" onclick="closeMobile()">Menu</a>
   <a href="contact.html" onclick="closeMobile()">Reservation</a>
-  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="index.html#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="events.html" onclick="closeMobile()">Events</a>
   <a href="contact.html" onclick="closeMobile()" style="color:var(--gold-light)">Reserve Table</a>
 </div>
 
@@ -316,26 +317,26 @@
 </section>
 
 <!-- ══════════ RECOMMENDATIONS ══════════ -->
-<section class="extras" style="background:var(--cream-dark); padding:80px 0;">
+<section style="background:var(--cream-dark); padding:80px 0;">
   <div class="container">
     <div style="text-align:center;margin-bottom:3rem;" class="reveal">
       <span class="section-tag" style="color:var(--gold-dark);">Smart Pairings</span>
       <h2 class="section-title" style="color:var(--primary);">You Might Also Like</h2>
       <div class="gold-line" style="margin:1rem auto;"></div>
-      <p class="section-subtitle">Curated combinations that go perfectly together.</p>
+      <p class="section-subtitle" style="margin:0 auto;">Curated combinations that go perfectly together.</p>
     </div>
     <div class="extras-grid">
-      <div class="extra-card reveal" style="background:var(--white); border:1px solid var(--beige); text-align:center; padding:2.5rem; border-radius:15px;">
+      <div class="extra-card reveal" style="background:var(--white); border:1px solid var(--beige);">
         <div class="icon" style="font-size:3rem; margin-bottom:1rem;">☕+🍰</div>
-        <h3 style="color:var(--primary); font-family:'Playfair Display',serif; margin-bottom:1rem;">The Classic Duo</h3>
-        <p style="color:var(--text-mid); font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem;">Pair our Classic Hot Chocolate with the Nutella Strawberry Cheesecake for the ultimate comfort experience.</p>
-        <button class="btn btn-gold" onclick="addToOrder('Classic Duo Combo', 550)">Add Combo (₹550)</button>
+        <h3 style="color:var(--primary); margin-bottom:0.75rem;">The Classic Duo</h3>
+        <p style="color:var(--text-mid); font-size:0.9rem; margin-bottom:1.5rem;">Pair our Classic Hot Chocolate with the Nutella Strawberry Cheesecake for the ultimate comfort experience.</p>
+        <button class="btn btn-gold" onclick="addToOrder('Classic Duo Combo', 550)">🛒 Add to Cart (₹550)</button>
       </div>
-      <div class="extra-card reveal" style="background:var(--white); border:1px solid var(--beige); text-align:center; padding:2.5rem; border-radius:15px;">
+      <div class="extra-card reveal" style="background:var(--white); border:1px solid var(--beige);">
         <div class="icon" style="font-size:3rem; margin-bottom:1rem;">🫖+🍫</div>
-        <h3 style="color:var(--primary); font-family:'Playfair Display',serif; margin-bottom:1rem;">Spiced & Sweet</h3>
-        <p style="color:var(--text-mid); font-size:0.9rem; line-height:1.6; margin-bottom:1.5rem;">Balance the rich Drizzling Chocolate Brownie with a warm cup of Kashmiri Kahwa for a perfect evening.</p>
-        <button class="btn btn-gold" onclick="addToOrder('Spiced & Sweet Combo', 500)">Add Combo (₹500)</button>
+        <h3 style="color:var(--primary); margin-bottom:0.75rem;">Spiced &amp; Sweet</h3>
+        <p style="color:var(--text-mid); font-size:0.9rem; margin-bottom:1.5rem;">Balance the rich Drizzling Chocolate Brownie with a warm cup of Kashmiri Kahwa for a perfect evening.</p>
+        <button class="btn btn-gold" onclick="addToOrder('Spiced &amp; Sweet Combo', 500)">🛒 Add to Cart (₹500)</button>
       </div>
     </div>
   </div>
