@@ -176,20 +176,21 @@ if(orderForm) {
     
     console.log("Order submitted (Mock sending to Excel/Sheets): ", orderDetails);
     
-    // Send to Google Sheets using URLSearchParams for better no-cors compatibility
+    // Send to Google Sheets using a URLSearchParams (Form Data) for max compatibility
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyC6YSvQPRa4winAwDb_C0bYHFicIIxTQWqABUzk9K0Xyu-vYzrl7hSY7odY7weredn_g/exec';
     
-    // Creating a form-style payload
     const formData = new URLSearchParams();
     for (const key in orderDetails) {
       formData.append(key, orderDetails[key]);
     }
 
+    // mode: 'no-cors' works best with form-encoded data
     fetch(scriptURL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData.toString()
+      body: formData
+    }).then(() => {
+      console.log("Data sent to Google Sheets successfully (Check sheet)");
     }).catch(error => console.error('Error!', error.message));
 
     // UI Updates
