@@ -308,7 +308,7 @@ function shareToWhatsApp() {
  * Unified function to send data to Google Sheets
  * Max compatibility with 'no-cors' mode
  */
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzVB6OO08f50Qmzdm1Sy_ks0SA6NKCvEVuctGB2TN8WHFktwRN_JyTTkvQ5EW7daUF_Zg/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbx9_wOR79rczyTGUSuJs8-LIEGewaZ8zYu1DJ2KrUwt_AlSH8nsCrpcLMmkva_7kRHRlQ/exec';
 
 /**
  * Fetch Menu items from Google Sheets
