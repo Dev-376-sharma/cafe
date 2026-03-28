@@ -240,13 +240,20 @@ function renderMenu(items) {
 
   if(drinksGrid) drinksGrid.innerHTML = '';
   if(dessertsGrid) dessertsGrid.innerHTML = '';
-  // (Optional: clear featured grid if you want it live too)
-
+  
   items.forEach(item => {
+    // Determine the image/emoji block
+    let imgBlock = `<div class="menu-card-emoji">${item.emoji || '🍽️'}</div>`;
+    if(item.image && item.image.trim() !== "") {
+        imgBlock = `<div class="menu-card-img-container">
+                      <img src="${item.image}" alt="${item.name}" class="menu-card-img" onerror="this.parentElement.innerHTML='<div class=\'menu-card-emoji\'>${item.emoji || '🍽️'}</div>'">
+                    </div>`;
+    }
+
     const cardHTML = `
       <div class="menu-card reveal visible" data-cat="${item.category}" style="position:relative;">
         ${item.popular === 'yes' ? '<span class="popular-badge">🏆 Bestseller</span>' : ''}
-        <div class="menu-card-emoji">${item.emoji || '🍽️'}</div>
+        ${imgBlock}
         <h3>${item.name}</h3>
         <p>${item.description}</p>
         <div class="menu-card-footer">
@@ -257,9 +264,9 @@ function renderMenu(items) {
     `;
 
     // Menu Page injection
-    if(item.category === 'drinks' && drinksGrid) {
+    if(item.category && item.category.toLowerCase().includes('drink') && drinksGrid) {
       drinksGrid.innerHTML += cardHTML;
-    } else if(item.category === 'desserts' && dessertsGrid) {
+    } else if(item.category && item.category.toLowerCase().includes('dessert') && dessertsGrid) {
       dessertsGrid.innerHTML += cardHTML;
     }
 
@@ -268,7 +275,8 @@ function renderMenu(items) {
         // Map to Home page card style
         const featuredCardHTML = `
           <div class="item-card reveal visible">
-            <div class="item-img-ph" style="display:flex;height:200px;background:var(--cream-dark);align-items:center;justify-content:center;font-size:4rem;border-radius:12px 12px 0 0;">${item.emoji || '☕'}</div>
+            ${item.image ? `<img src="${item.image}" alt="${item.name}" class="item-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ''}
+            <div class="item-img-ph" style="display:${item.image ? 'none' : 'flex'};height:200px;background:var(--cream-dark);align-items:center;justify-content:center;font-size:4rem;border-radius:12px 12px 0 0;">${item.emoji || '☕'}</div>
             <div class="item-body">
               <h3>${item.name}</h3>
               <p>${item.description}</p>
@@ -279,7 +287,6 @@ function renderMenu(items) {
             </div>
           </div>
         `;
-        // Clear loading text on first item
         if(featuredGrid.querySelector('.loading-text')) featuredGrid.innerHTML = '';
         featuredGrid.innerHTML += featuredCardHTML;
     }
