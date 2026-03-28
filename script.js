@@ -236,10 +236,12 @@ function showMenuError(msg) {
 function renderMenu(items) {
   const drinksGrid = document.querySelector('#cat-drinks .menu-grid');
   const dessertsGrid = document.querySelector('#cat-desserts .menu-grid');
+  const foodGrid = document.querySelector('#cat-food .menu-grid');
   const featuredGrid = document.querySelector('.featured-grid');
 
   if(drinksGrid) drinksGrid.innerHTML = '';
   if(dessertsGrid) dessertsGrid.innerHTML = '';
+  if(foodGrid) foodGrid.innerHTML = '';
   
   items.forEach(item => {
     // Determine the image/emoji block
@@ -268,6 +270,8 @@ function renderMenu(items) {
       drinksGrid.innerHTML += cardHTML;
     } else if(item.category && item.category.toLowerCase().includes('dessert') && dessertsGrid) {
       dessertsGrid.innerHTML += cardHTML;
+    } else if(item.category && item.category.toLowerCase().includes('food') && foodGrid) {
+      foodGrid.innerHTML += cardHTML;
     }
 
     // Home Page (Index) injection for Bestsellers
